@@ -12,12 +12,42 @@ public class Main {
     and save file to a folder called backups.
     ------------------------------------------------------------  **/
 
+    /* ---- Start Menu -----------------------------------------
+    Start menu that runs at the beginning of the program.
+    Anytime an action is completed display this menu.
+    This should be the only way to exit in program.
+    ------------------------------------------------------------  **/
+    static int startMenu() {
+
+        Scanner menuInput = new Scanner(System.in);
+
+        System.out.println("QUOTESAVE");
+        System.out.println("by STINJA\n\n");
+        System.out.println("01. ADD A QUOTE");
+        System.out.println("02. SHOW QUOTES");
+        System.out.println("03. EDIT QUOTES");
+        System.out.println("04. DELETE QUOTES");
+        System.out.println("05. QUIT/EXIT");
+        System.out.println("\n\nWhat would you like to do?");
+        System.out.print("Please enter a number: ");
+
+        int menuItem = menuInput.nextInt();
+
+        return menuItem;
+    }
+
     public static void main(String[] args) throws IOException {
+
+        //TODO refactor and use methods
+        //TODO add exception handling
+        //TODO create a menu
+
+        startMenu();
 
         File file = new  File("quotesList.txt"); // create the file
         file.createNewFile();
 
-        FileWriter fileWriter = new FileWriter(file);
+        FileWriter fileWriter = new FileWriter(file, true);
 
         Scanner input = new Scanner(System.in);
 
@@ -25,6 +55,7 @@ public class Main {
         System.out.print("Enter quote index: ");
         int quoteIndex = input.nextInt();
         input.nextLine(); // advance scanner due to scanner bug
+
         // write index
         fileWriter.write("Quote #" + quoteIndex);
         fileWriter.flush();
@@ -32,6 +63,7 @@ public class Main {
         // set quote
         System.out.print("Enter quote: ");
         String quoteContent = input.nextLine();
+
         // write quote
         fileWriter.write("\n\"" + quoteContent + "\"");
         fileWriter.flush();
@@ -39,10 +71,12 @@ public class Main {
         // set author
         System.out.print("Enter author: ");
         String quoteAuthor = input.nextLine();
-        // write author
-        fileWriter.write("\nby " + quoteAuthor);
+
+        // write author, add line after
+        fileWriter.write("\nby " + quoteAuthor + "\n");
         fileWriter.flush();
 
+        // add line and close
         fileWriter.close();
 
         // Read the file into a character array
@@ -50,10 +84,11 @@ public class Main {
         char [] someChar = new char[250];
         fileReader.read(someChar); // reads the content to the someChar array
 
+        /**
         // Output the file to the screen
         for (char c : someChar) // some sort of "enhanced for loop"
             System.out.print(c);
-        fileReader.close();
+        fileReader.close(); **/
 
     }
 }
