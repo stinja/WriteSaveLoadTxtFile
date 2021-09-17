@@ -4,23 +4,21 @@ import java.util.Scanner;
 import java.io.*;
 
 
-public class Main {
+/* ---- Quote listing -------------------------------------------
+Add/Save/Load quotes using a master text file.
+To avoid accidental overwrite, have program create a back up file
+and save file to a folder called backups.
+------------------------------------------------------------  **/
 
-    /* ---- Quote listing -------------------------------------------
-    Add/Save/Load quotes using a master text file.
-    To avoid accidental overwrite, have program create a back up file
-    and save file to a folder called backups.
-    ------------------------------------------------------------  **/
+public class Main {
 
     /* ---- Start Menu -----------------------------------------
     Start menu that runs at the beginning of the program.
     Anytime an action is completed display this menu.
     This should be the only way to exit in program.
     ------------------------------------------------------------  **/
-    static int startMenu() {
-
-        Scanner menuInput = new Scanner(System.in);
-
+    static int startMenu(Scanner menuInput) {
+        // output a bunch of text
         System.out.println("QUOTESAVE");
         System.out.println("by STINJA\n\n");
         System.out.println("01. ADD A QUOTE");
@@ -31,9 +29,14 @@ public class Main {
         System.out.println("\n\nWhat would you like to do?");
         System.out.print("Please enter a number: ");
 
-        int menuItem = menuInput.nextInt();
+        // grab menu selection from scanner
+        int menuSelect = menuInput.nextInt();
 
-        return menuItem;
+        // reset scanner passed in this method
+        menuInput.reset();
+
+        // return the selection as an int
+        return menuSelect;
     }
 
     public static void main(String[] args) throws IOException {
@@ -42,14 +45,14 @@ public class Main {
         //TODO add exception handling
         //TODO create a menu
 
-        startMenu();
-
         File file = new  File("quotesList.txt"); // create the file
         file.createNewFile();
 
         FileWriter fileWriter = new FileWriter(file, true);
 
         Scanner input = new Scanner(System.in);
+
+        int menuSelect = startMenu(input);
 
         // set index
         System.out.print("Enter quote index: ");
