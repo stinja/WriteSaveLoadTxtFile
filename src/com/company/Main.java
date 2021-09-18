@@ -12,7 +12,7 @@ and save file to a folder called backups.
 
 public class Main {
 
-    /** --- Start Menu ------------------------
+    /** --- startMenu -------------------------
     Start menu that runs at the beginning of the program.
     Anytime an action is completed display this menu.
     This should be the only way to exit in program.
@@ -37,6 +37,22 @@ public class Main {
 
         // return the selection as an int
         return menuSelect;
+    }
+
+    /** --- groupQuoteData -----------------------
+     * @param quoteIndex
+     * @param quoteContent
+     * @param quoteAuthor
+     * @return quote
+     * Pass to this method each variable of a single quote
+     * and it will turn that data into an array.
+     * -------------------------------------------
+     */
+    static String[] groupQuoteData(int quoteIndex, String quoteContent, String quoteAuthor) {
+
+        String[] quote = {String.valueOf(quoteIndex), quoteContent, quoteAuthor};
+        return quote;
+
     }
 
     //TODO refactor and use methods
@@ -75,7 +91,6 @@ public class Main {
 
 
         //TODO create a menu
-
         File file = new  File("quotesList.txt"); // create the file
         file.createNewFile(); //TODO add check and only run if a quote file doesnt exist
 
